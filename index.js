@@ -10,6 +10,7 @@ const CartRoute = require("./routes/cart");
 app.use(cors({
     origin:"*"
 }));
+const stripe  = require("./routes/stripe");
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -29,6 +30,7 @@ mongoose
 app.use("/server/users",userRoute);
 app.use("/server/products",productRoute);
 app.use("/server/addtocart",CartRoute);
+app.use("/server/payment",stripe);
 
 app.listen(process.env.PORT||8800  ,()=>{
     console.log("Backend server is runing");
